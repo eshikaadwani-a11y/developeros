@@ -60,6 +60,11 @@ export interface VectorStore {
   deleteByDocument(documentId: string): Promise<void>;
 }
 
+/** Pluggable keyword (full-text) search backend for the hybrid path. */
+export interface KeywordStore {
+  search(projectId: string, query: string, topK: number): Promise<RetrievedChunk[]>;
+}
+
 export interface ParsedFile {
   text: string;
   /** Optional page count for paginated formats (PDF). */
