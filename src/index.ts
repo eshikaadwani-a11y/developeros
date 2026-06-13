@@ -7,6 +7,7 @@
 
 import { App } from "./cli/app";
 import { CommandRegistry } from "./cli/registry";
+import { noteCommand } from "./commands/note";
 import { statusCommand } from "./commands/status";
 import { taskCommand } from "./commands/task";
 import { logger } from "./core/logger";
@@ -15,6 +16,7 @@ function buildRegistry(): CommandRegistry {
   const registry = new CommandRegistry();
   registry.register(statusCommand);
   registry.register(taskCommand);
+  registry.register(noteCommand);
   return registry;
 }
 
