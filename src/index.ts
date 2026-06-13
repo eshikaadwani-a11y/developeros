@@ -1,21 +1,22 @@
+#!/usr/bin/env node
 /**
- * DeveloperOS - MVP entry point.
+ * DeveloperOS - entry point.
+ *
+ * Milestone 1 establishes the foundation (logger, types, metadata).
+ * The command router is wired up in later milestones.
  */
 
-export interface AppInfo {
-  name: string;
-  version: string;
-}
+import { logger } from "./core/logger";
+import { APP_NAME, APP_TAGLINE, APP_VERSION } from "./core/meta";
 
-export function getAppInfo(): AppInfo {
-  return { name: "DeveloperOS", version: "0.1.0" };
-}
-
-function main(): void {
-  const info = getAppInfo();
-  console.log(`${info.name} v${info.version} starting up...`);
+function main(): number {
+  logger.heading(`${APP_NAME} v${APP_VERSION}`);
+  logger.dim(APP_TAGLINE);
+  return 0;
 }
 
 if (require.main === module) {
-  main();
+  process.exit(main());
 }
+
+export { main };
