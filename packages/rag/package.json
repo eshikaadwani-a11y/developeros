@@ -1,5 +1,5 @@
 {
-  "name": "@developeros/ai",
+  "name": "@developeros/rag",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -15,8 +15,12 @@
   },
   "dependencies": {
     "@developeros/shared": "workspace:*",
-    "openai": "^4.68.4",
-    "@anthropic-ai/sdk": "^0.30.1"
+    "@developeros/ai": "workspace:*",
+    "@developeros/database": "workspace:*"
+  },
+  "optionalDependencies": {
+    "pdf-parse": "^1.1.1",
+    "mammoth": "^1.8.0"
   },
   "devDependencies": {
     "@types/node": "^20.16.13",
