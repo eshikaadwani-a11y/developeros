@@ -2,21 +2,31 @@
 /**
  * DeveloperOS - entry point.
  *
- * Milestone 1 establishes the foundation (logger, types, metadata).
- * The command router is wired up in later milestones.
+ * Builds the command registry and dispatches the CLI invocation.
  */
 
+import { App } from "./cli/app";
+import { CommandRegistry } from "./cli/registry";
 import { logger } from "./core/logger";
-import { APP_NAME, APP_TAGLINE, APP_VERSION } from "./core/meta";
 
-function main(): number {
-  logger.heading(`${APP_NAME} v${APP_VERSION}`);
-  logger.dim(APP_TAGLINE);
-  return 0;
+function buildRegistry(): CommandRegistry {
+  const registry = new CommandRegistry();
+  // Commands are registered here as they are implemented in later milestones.
+  return registry;
+}
+
+export async function main(argv: string[]): Promise<number> {
+  const app = new App(buildRegistry(), logger);
+  return app.run(argv);
 }
 
 if (require.main === module) {
-  process.exit(main());
+  // argv[0] = node, argv[1] = script path; the rest is user input.
+  main(process.argv.slice(2)).then(
+    (code) => process.exit(code),
+    (err: unknown) => {
+      logger.error(err instanceof Error ? err.message : String(err));
+      process.exit(1);
+    },
+  );
 }
-
-export { main };
