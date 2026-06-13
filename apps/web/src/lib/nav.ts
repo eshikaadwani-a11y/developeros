@@ -5,6 +5,7 @@ import {
   BookOpen,
   ListChecks,
   BarChart3,
+  Lightbulb,
   Settings,
   type LucideIcon,
 } from "lucide-react";
@@ -21,6 +22,7 @@ export const navItems: NavItem[] = [
   { label: "Projects", href: "/projects", icon: FolderGit2 },
   { label: "Knowledge Base", href: "/knowledge", icon: BookOpen },
   { label: "Tasks", href: "/tasks", icon: ListChecks },
+  { label: "ML Insights", href: "/insights", icon: Lightbulb },
   { label: "Analytics", href: "/analytics", icon: BarChart3 },
   { label: "Settings", href: "/settings", icon: Settings },
 ];

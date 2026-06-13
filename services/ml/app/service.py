@@ -60,3 +60,15 @@ def predict(model_id: str, features: List[List[float]]) -> dict:
     module = TASKS[entry.task]
     predictions = module.predict(entry.model, features)
     return {"model_id": model_id, "predictions": predictions}
+
+
+def explain(
+    model_id: str,
+    features: List[List[float]],
+    sample_index: Optional[int] = None,
+    feature_names: Optional[List[str]] = None,
+) -> dict:
+    from . import explain as explain_mod
+
+    entry = registry.get(model_id)
+    return explain_mod.explain(entry, features, sample_index, feature_names)

@@ -12,6 +12,7 @@ const PROTECTED_PREFIXES = [
   "/projects",
   "/knowledge",
   "/tasks",
+  "/insights",
   "/analytics",
   "/settings",
 ];

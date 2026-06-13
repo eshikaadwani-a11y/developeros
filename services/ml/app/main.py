@@ -7,6 +7,8 @@ from fastapi import FastAPI, HTTPException
 from . import __version__, service
 from .registry import registry
 from .schemas import (
+    ExplainRequest,
+    ExplainResponse,
     ModelInfo,
     PredictRequest,
     PredictResponse,
@@ -48,3 +50,16 @@ def predict(req: PredictRequest) -> PredictResponse:
 @app.get("/models", response_model=list[ModelInfo])
 def list_models() -> list[ModelInfo]:
     return [ModelInfo(**m) for m in registry.list()]
+
+
+@app.post("/explain", response_model=ExplainResponse)
+def explain(req: ExplainRequest) -> ExplainResponse:
+    if not registry.has(req.model_id):
+        raise HTTPException(status_code=404, detail="Unknown model id")
+    try:
+        result = service.explain(
+            req.model_id, req.features, req.sample_index, req.feature_names
+        )
+    except Exception as exc:  # SHAP/runtime errors -> 400
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return ExplainResponse(**result)

@@ -42,3 +42,22 @@ class ModelInfo(BaseModel):
     metrics: Dict[str, float]
     feature_count: int
     created_at: float
+
+
+class ExplainRequest(BaseModel):
+    model_id: str
+    features: List[List[float]] = Field(..., description="Rows to explain")
+    sample_index: Optional[int] = Field(None, description="Index for a per-prediction explanation")
+    feature_names: Optional[List[str]] = None
+
+
+class FeatureImportance(BaseModel):
+    feature: str
+    importance: float
+
+
+class ExplainResponse(BaseModel):
+    model_id: str
+    feature_importance: List[FeatureImportance]
+    base_value: Optional[float] = None
+    sample_explanation: Optional[Dict[str, Any]] = None
