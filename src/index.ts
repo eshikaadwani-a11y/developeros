@@ -7,11 +7,12 @@
 
 import { App } from "./cli/app";
 import { CommandRegistry } from "./cli/registry";
+import { statusCommand } from "./commands/status";
 import { logger } from "./core/logger";
 
 function buildRegistry(): CommandRegistry {
   const registry = new CommandRegistry();
-  // Commands are registered here as they are implemented in later milestones.
+  registry.register(statusCommand);
   return registry;
 }
 
