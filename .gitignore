@@ -1,20 +1,38 @@
 # Dependencies
 node_modules/
+.pnpm-store/
 
 # Build output
 dist/
-build/
+.next/
 out/
+build/
+*.tsbuildinfo
+
+# Turbo
+.turbo/
+
+# Env
+.env
+.env.local
+.env.*.local
 
 # Logs
 *.log
 npm-debug.log*
+pnpm-debug.log*
 
-# Environment
-.env
-.env.local
+# Python (services/ml)
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.mypy_cache/
 
 # OS / editor
 .DS_Store
 .idea/
 .vscode/
+
+# Coverage
+coverage/
